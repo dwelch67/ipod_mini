@@ -1,0 +1,93 @@
+
+If you climb into your wayback machine, when the ipod (now called classic)
+3rd gen was the latest thing.  I was just getting into ARM and embedded
+stuff.  And bought my first ipod because I had found something called
+ipodlinux (http://ipodlinux.org but it appears to be gone) where they
+had figured out stuff and had a linux running.  I didnt want to run
+linux but like the GameBoyAdvance wanted to do some homebrew.
+
+I did, ported Asteroids and some other things, bare metal to the ipod.
+
+Repeated this task with the ipod 5G video.
+
+But have not done anything since.  I do have some mini's though, I
+think they are pretty cool, fairly easy to take apart and replace
+the battery and the hard drive with a compact flash, so no more
+moving parts, uses less power, and will last much longer.
+
+Note, use the hot glue approach to remove the end caps, not the jam
+a screwdriver in approach, the screwdriver approach damages the case.
+For the hot glue you need something a little stronger than the hobby
+glue that comes with the gun, I ended up having to use so much that I
+later had to dig it out of the headphone jack and the 30 pin connector
+as well as take several tries.  Tougher glue will get the ends off on
+the first try.  Just google around to find out about upgrading the mini.
+
+So ipodlinux had a bootloader approach, a multiboot thing allowing for
+the apple firmware and the ipodlinux firmware (and whatever other firmware)
+you wanted to have in the boot order, you pressed one of the four buttons
+menu play/pause prev next to pick which image to boot.  Well, now we have
+http://www.rockbox.org.  Which is light years ahead and supports many
+more brands and players than ipodlinux.  It has a different loader
+approach and best of all a very simple to use installer.
+
+You can recover if you screw up, well you might not recover your music
+or other files so if you are worried about that dont do any of this.  But
+if you are willing, mess up or not, you will need to use this approach
+to try new programs that I am going to show you.
+
+You should already know that pressing and holding select and menu at
+the same time for a while causes any ipod (well the real, classic, non
+touch ipods) to reboot.  If while rebooting you press and hold select
+and play it goes into a file mode where you can plug in the usb and
+mount it on a computer, reformat the drive, have iTunes recover the
+device with the apple firmware and such or have rockbox re-install, etc
+or try more of my programs.
+
+I start by using the rockbox installer to install rockbox, and try that
+note that if you use select+menu to reboot from rockbox and then hold
+menu the rockbox firmware will try to boot the prior/Apple firmware so
+you can basically dual boot rockbox and apple.
+
+Until I learn more if I bother to, after installing rockbox, there will
+be a .rockbox directory on your ipod if you mount the drive.  In
+that directory is a file called rockbox.ipod.  Which is just an ARM
+binary, basically bare metal.  The rockbox bootloader wants a small
+checksum and header up front, which for the ipod mini is the checksum
+of all the bytes in the binary, plus 11 for the mini2g (for now I am
+learning on the 2g will add 1g stuff along the way), big endian four
+bytes, then the four byte string "mn2g" and then the ARM binary.  Rockbox
+sources have a file named scramble that preps a binary for all their
+targets, I made a program named rockloader that simply adds these 8
+bytes and outputs a file (which my makefile calls rockbox.ipod).
+
+I recommend that you backup your rockbox.ipod file, call it rockbox.ipod.back
+or something before overwriting it with these programs.
+
+Start with mini2g/blinker0 this simply blinks the backlight.
+
+The ipodliux.org pages had good stuff but perhaps that is all lost, I
+have not checked the internet archive to see what is there.
+
+The rockbox folks though have a lot of good stuff as well, like ipodlinux
+for some of it you have to look at the code.
+
+For development tools I either use my own build of the gnu tools, see
+my build_gcc repo for scripts. (build_arm) or go to codesourcery.com
+even though they have been assimilated by Mentor Graphics, and then find/follow
+your way to the LITE version of their gnu tools, get the gnu eabi version
+and install that somewhere.  For either one set your PATH accordingly.
+My bare metal programs try to not use C nor compiler libraries so you
+can usually use any cross compiler, the gnu linux arm cross compiler
+will work, just change the
+
+CROSS_COMPILE = arm-none-eabi
+
+line in the Makefile.
+
+I will eventually put clang/llvm Makefile support in and such.  The linker
+scripts are gnu based (memmap is usally what I call it).  If you want
+to read more ramblings on taking control of the compiler and linker and
+how and why I do the strange looking things I do see the baremetal and
+bssdata directorys in my raspberrypi repo.
+
