@@ -33,23 +33,27 @@ approach and best of all a very simple to use installer.
 
 You can recover if you screw up, well you might not recover your music
 or other files so if you are worried about that dont do any of this.  But
-if you are willing, mess up or not, you will need to use this approach
+if you are willing.  Mess up or not, you will need to use this approach
 to try new programs that I am going to show you.
 
 You should already know that pressing and holding select and menu at
 the same time for a while causes any ipod (well the real, classic, non
 touch ipods) to reboot.  If while rebooting you press and hold select
 and play it goes into a file mode where you can plug in the usb and
-mount it on a computer, reformat the drive, have iTunes recover the
-device with the apple firmware and such or have rockbox re-install, etc
-or try more of my programs.
+mount it on a computer, have iTunes recover the device with the apple
+firmware and such or have rockbox re-install, etc or try more of my
+programs.
 
-I start by using the rockbox installer to install rockbox, and try that
-note that if you use select+menu to reboot from rockbox and then hold
-menu the rockbox firmware will try to boot the prior/Apple firmware so
-you can basically dual boot rockbox and apple.
+I start by using the rockbox installer to install rockbox, and boot
+rockbox to see that everything is working.
 
-Until I learn more if I bother to, after installing rockbox, there will
+Note that if you use select+menu to reboot from rockbox and then hold
+menu through the apple logo, the rockbox firmware will try to boot the
+prior/Apple firmware so you can basically dual boot rockbox and apple.
+That does not work for my programs that is code in the rockbox program
+doing that.
+
+Until I learn more, if I bother to, after installing rockbox, there will
 be a .rockbox directory on your ipod if you mount the drive.  In
 that directory is a file called rockbox.ipod.  Which is just an ARM
 binary, basically bare metal.  The rockbox bootloader wants a small
@@ -62,15 +66,21 @@ targets, I made a program named rockloader that simply adds these 8
 bytes and outputs a file (which my makefile calls rockbox.ipod).
 
 I recommend that you backup your rockbox.ipod file, call it rockbox.ipod.back
-or something before overwriting it with these programs.
+or something before overwriting it with these programs.  Then when done
+playing put back the rockbox.ipod file and then you can boot rockbox or
+the apple firmware.
 
 Start with mini2g/blinker0 this simply blinks the backlight.
 
-The ipodliux.org pages had good stuff but perhaps that is all lost, I
-have not checked the internet archive to see what is there.
+Ipodlinux stuff:
+http://ipodlinux.sourceforge.net/index.shtml
 
-The rockbox folks though have a lot of good stuff as well, like ipodlinux
-for some of it you have to look at the code.
+Hurry while it is still there.
+svn co https://ipodlinux.svn.sourceforge.net/svnroot/ipodlinux
+
+The rockbox folks have lots of good info, mostly though you have to
+go through the source code.  Both ipodlinux and rockbox are well
+written and easy to read.
 
 For development tools I either use my own build of the gnu tools, see
 my build_gcc repo for scripts. (build_arm) or go to codesourcery.com
@@ -91,3 +101,12 @@ to read more ramblings on taking control of the compiler and linker and
 how and why I do the strange looking things I do see the baremetal and
 bssdata directorys in my raspberrypi repo.
 
+I assume that you know better than to run these programs on the wrong
+device (note the rockbox installer will try to detect your device, you
+dont have to actually install).  I will not be responsible for you
+destroying hardware, bare metal development more so than application
+development includes the risk of partial to total loss of the hardware
+(and stuff connected to it).  You have been warned.
+
+Ipod mini's are still easy to find around $30 on ebay.  Hurry before I
+buy all of them.

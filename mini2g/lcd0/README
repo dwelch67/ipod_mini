@@ -1,0 +1,20 @@
+
+See the top level README for more information.
+
+As described in the top level readme, copy rockbox.ipod to the .rockbox
+directory on your ipod and use menu+select to reboot.
+
+This is a simple show text on the lcd panel program.  Eventually
+scrolling text.
+
+The display is really 138x110 but I think the controller supports
+160x128 as the big brother ipods (classic) had, the ones before the
+mini.  So we pretend to have a 160x128 even though we cant see all of it.
+
+You can probably figure out this is just writing bitmap data, pixels,
+ones and zeros so isnt really limited to text or this isnt really some
+lcd text mode thing, just filling the screen with bytes and the bytes
+happen to be raw font data.
+
+Eventually I will read the manual for the lcd controller and hopefully
+replace the ipodlinux/rockbox code.  It isnt very complicated.
