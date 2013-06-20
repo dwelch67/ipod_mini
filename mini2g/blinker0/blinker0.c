@@ -17,9 +17,8 @@ void backlight_off ( void )
 int main ( void )
 {
     unsigned int ra;
-    unsigned int rb;
 
-    for(rb=0;rb<5;rb++)
+    while(1)
     {
         backlight_on();
         for(ra=0;ra<DELAY_COUNT;ra++) dummy(ra);
