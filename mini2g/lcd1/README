@@ -1,0 +1,8 @@
+
+See the top level README for more information.
+
+As described in the top level readme, copy rockbox.ipod to the .rockbox
+directory on your ipod and use menu+select to reboot.
+
+Derived from lcd0 this is strictly for printing/scrolling 32 bit hex
+numbers
