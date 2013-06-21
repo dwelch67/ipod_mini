@@ -1,0 +1,35 @@
+
+See the top level README for more information.
+
+As described in the top level readme, copy rockbox.ipod to the .rockbox
+directory on your ipod and use menu+select to reboot.
+
+This is a simple blinker program, we dont have an led like an eval board
+might have but we do have the backlight.
+
+The mini1g uses a PortalPlayer PP5020 cpu, the backlight control is
+controlled using a gpio port.
+
+To change a gpio output on this processor you need the gpio bit and the
+gpio mask << 8.  The backlight control is bit 0x08 so to turn the bit
+on you write 0x0808 , 0x08.. (bit3+8 = 11) being the mask and
+0x..08 (bit 3) being the bit we want to write.  To turn the backlight
+off write 0x0800, bit 11 being the mask bit and bit 3 being the data
+bit.
+
+I use a simple counter loop to burn some time, and the call to dummy()
+is to prevent the optimizer from removing the loop completely.
+
+I am still learning as I go, and the blink rate was affected one time
+by holding a button when I ran, maybe there is a cache on/cache off thing
+or clock rate control in the rockbox bootloader or the ipod itself, I
+dont know, if you reboot the ipod and then dont touch anything the
+bink rate is not too fast, not too slow, just right.  If you change
+the define and re-compile and re-load (see top level readme) it should
+change the blink rate.
+
+The mini1g and 2g appear fairly similar from a processor perspective,
+still learning the difference.  As far as this program goes they are
+identical.  The rockbox bootloader though does care so the mini1g
+has a slightly different header than the mini2g.
+

@@ -1,0 +1,11 @@
+
+MEMORY
+{
+    ram : ORIGIN = 0x10000000, LENGTH = 0x1000
+}
+
+SECTIONS
+{
+    ROM : { startup.o } > ram
+}
+
