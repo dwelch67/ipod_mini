@@ -1,0 +1,16 @@
+
+See the top level README for more information.
+
+As described in the top level readme, copy rockbox.ipod to the .rockbox
+directory on your ipod and use menu+select to reboot.
+
+Derived from lcd1 and ipodlinux code, this reads the ipod keyboard (wheel)
+and prints out the raw values.  Looks like the wheel itself goes from 0x00
+to 0x5F and there are discretes for the buttons.
+
+Wheel value       (wheel_value>>16)&0xFF;
+Select button     wheel_value & 0x0100
+FastFoward Button wheel_value & 0x0200
+Rewind Button     wheel_value & 0x0400
+PlayPause Button  wheel_value & 0x0800
+Menu Button       wheel_value & 0x1000
